@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oslo Travel Elite - Experiencias Extraordinarias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        /* Core & Reset */
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #333;
+            --accent: #c8a97e;
+            --light: #f8f8f8;
+            --dark: #0a0a0a;
+            --text: #333;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Premium Header */
+        .premium-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            color: white;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            color: white;
+            background-color: var(--dark);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+            animation: zoomBg 20s infinite alternate ease-in-out;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .hero-headline {
+            font-size: 4.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-subheadline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* Timer Section */
+        .timer-section {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .countdown-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            min-width: 120px;
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--accent);
+        }
+
+        .countdown-label {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        /* Premium Features */
+        .features {
+            background: white;
+            padding: 6rem 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .feature-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 400px;
+            cursor: pointer;
+        }
+
+        .feature-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover .feature-image {
+            transform: scale(1.1);
+        }
+
+        .feature-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: white;
+            transform: translateY(100px);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover .feature-content {
+            transform: translateY(0);
+        }
+
+        /* Statistics */
+        .stats {
+            background: var(--light);
+            padding: 6rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--dark);
+            color: white;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(200,169,126,0.3);
+        }
+
+        /* Animations */
+        @keyframes zoomBg {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-headline {
+                font-size: 3.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-headline {
+                font-size: 2.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+            }
+
+            .countdown-item {
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="premium-header">
+        <div class="header-content">
+            <div class="brand">OSLO ELITE</div>
+            <div class="header-cta">
+                <i class="fas fa-phone-alt"></i> +1 800 LUXURY
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920" alt="Luxury Travel">
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-headline" data-aos="fade-up">Experiencias de Viaje Extraordinarias para los Más Exigentes</h1>
+            <p class="hero-subheadline" data-aos="fade-up" data-aos-delay="200">Donde cada momento se transforma en un recuerdo inolvidable.</p>
+        </div>
+    </section>
+
+    <section class="timer-section">
+        <div class="container">
+            <h2>Oferta Exclusiva de Temporada</h2>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="days">00</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-grid">
+            <div class="feature-card" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800" class="feature-image" alt="Luxury Suite">
+                <div class="feature-content">
+                    <h3>Suites de Lujo</h3>
+                    <p>Alojamientos exclusivos seleccionados rigurosamente para nuestros clientes más exigentes.</p>
+                </div>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1539758462369-43adaa19bc1f?auto=format&fit=crop&w=800" class="feature-image" alt="Private Yacht">
+                <div class="feature-content">
+                    <h3>Experiencias Privadas</h3>
+                    <p>Yates privados, jets exclusivos y experiencias personalizadas únicas.</p>
+                </div>
+            </div>
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800" class="feature-image" alt="Fine Dining">
+                <div class="feature-content">
+                    <h3>Gastronomía Selecta</h3>
+                    <p>Acceso VIP a los restaurantes más exclusivos del mundo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-card" data-aos="fade-up">
+                <div class="stat-value">98%</div>
+                <p>Satisfacción de Clientes Elite</p>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-value">150+</div>
+                <p>Destinos Exclusivos</p>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-value">24/7</div>
+                <p>Concierge Personal</p>
+            </div>
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-value">15+</div>
+                <p>Años de Excelencia</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <div class="form-container">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Descubre el Lujo Personalizado</h2>
+            <form id="luxuryForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Correo electrónico" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-control" placeholder="Teléfono" required>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" required>
+                        <option value="">Selecciona tu presupuesto</option>
+                        <option value="50k">€50,000 - €100,000</option>
+                        <option value="100k">€100,000 - €250,000</option>
+                        <option value="250k">€250,000<option value="250k">€250,000 - €500,000</option>
+                        <option value="500k">€500,000+</option>
+                    </select>
+                </div>
+                <button type="submit" class="cta-button">Reserva Tu Consulta Privada</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Countdown Timer
+        function updateCountdown() {
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + 7); // 7 days from now
+
+            function update() {
+                const now = new Date().getTime();
+                const distance = endDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+                document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+            }
+
+            setInterval(update, 1000);
+            update();
+        }
+
+        updateCountdown();
+
+        // Parallax Effect for Hero
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-bg img');
+            if (hero) {
+                hero.style.transform = `translate3d(0, ${scrolled * 0.4}px, 0)`;
+            }
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.premium-header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(0,0,0,0.95)';
+                header.style.padding = '1rem 0';
+            } else {
+                header.style.background = 'rgba(0,0,0,0.8)';
+                header.style.padding = '1.5rem 0';
+            }
+        });
+
+        // Form Submission
+        document.getElementById('luxuryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Fancy success animation
+            this.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <div class="success-checkmark">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3>Solicitud Recibida</h3>
+                    <p>Nuestro equipo elite se pondrá en contacto contigo en las próximas 24 horas.</p>
+                </div>
+            `;
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- Trust Badges Section -->
+    <section style="background: var(--primary); color: white; padding: 4rem 0; text-align: center;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <h2 style="color: var(--accent); margin-bottom: 3rem;">Reconocimientos y Certificaciones</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                <div class="trust-badge" data-aos="fade-up">
+                    <i class="fas fa-award fa-3x" style="color: var(--accent);"></i>
+                    <p>Mejor Agencia de Viajes de Lujo 2023</p>
+                </div>
+                <div class="trust-badge" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-shield-alt fa-3x" style="color: var(--accent);"></i>
+                    <p>Certificación ISO 9001</p>
+                </div>
+                <div class="trust-badge" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-star fa-3x" style="color: var(--accent);"></i>
+                    <p>5 Estrellas Forbes Travel</p>
+                </div>
+                <div class="trust-badge" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-crown fa-3x" style="color: var(--accent);"></i>
+                    <p>Luxury Travel Guild Elite Member</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
